@@ -2,8 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import db from "./config/database.js";
 import UsersRouter from "./router/index.js";
-db.sync()
 dotenv.config();
+db.sync();
+
 const app = express();
 
 try{
