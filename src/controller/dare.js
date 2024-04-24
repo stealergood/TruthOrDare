@@ -1,6 +1,18 @@
 import { Dare } from "../model/dbModel.js";
 import db from "../config/database.js";
 
+export const Dare = async (req, res) => {
+    try {
+        const dare_qst = await Dare.findAll({
+            attributes: ['id', 'question']
+        });
+        const random = Math.floor(Math.random() * dare_qst.length);
+        res.json(dare_qst[random]);
+    } catch (error) {
+        res.json({msg: error});
+    }
+};
+
 export const GetDare = async (req, res) => {
     try {
         const dare_qst = await Dare.findAll({
@@ -8,7 +20,7 @@ export const GetDare = async (req, res) => {
         });
         res.json(dare_qst)
     } catch (error) {
-        console.log(error)
+        res.json({msg: error})
     };
 };
 
@@ -21,7 +33,7 @@ export const PostDare = async (req, res) => {
         });
         res.json({msg: 'Dare Question Berhasil Ditambahkan'})
     } catch (error) {
-        console.log(error)
+        res.json({msg: error})
     };
 };
 
@@ -38,7 +50,7 @@ export const DeleteDare = async (req, res) => {
         await db.query('ALTER TABLE truth AUTO_INCREMENT = 1');
         res.json({msg: `Data ${id} berhasil dihapus`});
     } catch (error) {
-        console.log(error)
+        res.json({msg: error})
     };
 };
 
@@ -49,6 +61,6 @@ export const ResetDare = async (req, res) => {
         });
         res.json({msg: "semua pertanyaan berhasil dihapus!!"});
     } catch (error) {
-        console.log(error);
+        res.json({msg: error})
     };
 };

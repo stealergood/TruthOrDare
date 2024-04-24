@@ -1,6 +1,18 @@
 import { Truth } from "../model/dbModel.js";
 import db from "../config/database.js";
 
+export const Truth = async (req, res) => {
+    try {
+        const truth_qst = await Truth.findAll({
+            attributes: ['id', 'question']
+        });
+        const random = Math.floor(Math.random() * truth_qst.length);
+        res.json(truth_qst[random]);
+    } catch (error) {
+        res.json({msg: error});
+    }
+};
+
 export const GetTruth = async (req, res) => {
     try {
         const truth_qst = await Truth.findAll({
@@ -8,7 +20,7 @@ export const GetTruth = async (req, res) => {
         });
         res.json(truth_qst)
     } catch (error) {
-        console.log(error)
+        res.json({msg: error});
     };
 };
 
@@ -21,7 +33,7 @@ export const PostTruth = async (req, res) => {
         });
         res.json({msg: 'Truth Question Berhasil Ditambahkan'})
     } catch (error) {
-        console.log(error)
+        res.json({msg: error});
     };
 };
 
@@ -38,7 +50,7 @@ export const DeleteTruth = async (req, res) => {
         await db.query('ALTER TABLE truth AUTO_INCREMENT = 1');
         res.json({msg: `Data ${id} berhasil dihapus`});
     } catch (error) {
-        console.log(error)
+        res.json({msg: error});
     };
 };
 
@@ -49,6 +61,6 @@ export const ResetTruth = async (req, res) => {
         });
         res.json({msg: "semua pertanyaan berhasil dihapus!!"});
     } catch (error) {
-        console.log(error);
+        res.json({msg: error});
     };
 };

@@ -1,18 +1,19 @@
 import express from 'express';
-import { GetTruth, PostTruth, DeleteTruth, ResetTruth } from '../controller/truth.js';
-import { GetDare, PostDare, DeleteDare, ResetDare } from '../controller/dare.js';
+import { Truth, GetTruth, PostTruth, DeleteTruth, ResetTruth } from '../controller/truth.js';
+import { Dare, GetDare, PostDare, DeleteDare, ResetDare } from '../controller/dare.js';
 
 const router = express.Router();
 
-router.get('/truth', GetTruth);
-router.post('/truth', PostTruth);
-router.delete('/truth', DeleteTruth);
-router.delete('/truth-reset', ResetTruth);
+router.get('/truth', Truth)
+router.get('/get-truth', GetTruth);
+router.post('/add-truth', PostTruth);
+router.delete('/delete-truth', DeleteTruth);
+router.delete('/reset-truth', ResetTruth);
 
-
-router.get('/dare', GetDare);
-router.post('/dare', PostDare);
-router.delete('/dare', DeleteDare);
-router.delete('/dare-reset', ResetDare);
+router.get('/dare', Dare);
+router.get('/get-dare', GetDare);
+router.post('/add-dare', PostDare);
+router.delete('/delete-dare', DeleteDare);
+router.delete('/reset-dare', ResetDare);
 
 export default router
